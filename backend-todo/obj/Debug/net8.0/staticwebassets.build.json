@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "AHhwPOxhVG6s7idyzwi0V9bZfeC6sCLU1dTlQEnAMdw=",
+  "Source": "backend-todo",
+  "BasePath": "_content/backend-todo",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

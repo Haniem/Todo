@@ -17,5 +17,12 @@ namespace backend_todo.Models
         public string? PasswordHash { get; set; }
 
         public List<Task> Task { get; set; } = new List<Task>();
+
+        public List<Comment> Comments { get; set;} = new List<Comment>();
+        
+        public DateTime created_at { get; set; } = DateTime.UtcNow;
+
+        public DateTime updated_at { get; set; } = DateTime.UtcNow;
+
     }
 }

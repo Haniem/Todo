@@ -22,6 +22,91 @@ namespace backend_todo.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("backend_todo.Models.Attachments", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<int?>("Taskid")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("created_at")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("task_id")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Taskid");
+
+                    b.ToTable("Attachments");
+                });
+
+            modelBuilder.Entity("backend_todo.Models.Comment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<int>("Taskid")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("Userid")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("created_at")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("task_id")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("user_id")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Taskid");
+
+                    b.HasIndex("Userid");
+
+                    b.ToTable("Comment");
+                });
+
+            modelBuilder.Entity("backend_todo.Models.Tag", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<DateTime>("created_at")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Tag");
+                });
+
             modelBuilder.Entity("backend_todo.Models.Task", b =>
                 {
                     b.Property<int>("id")
@@ -30,20 +115,88 @@ namespace backend_todo.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
+                    b.Property<int?>("Userid")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("created_at")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("discription")
                         .HasColumnType("text");
 
-                    b.Property<string>("status")
-                        .HasColumnType("text");
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("userId")
+                    b.Property<int?>("user_id")
                         .HasColumnType("integer");
 
                     b.HasKey("id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("Userid");
 
                     b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("backend_todo.Models.Task_Priority", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<int?>("Taskid")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("created_at")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("taks_id")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Taskid");
+
+                    b.ToTable("Task_Priority");
+                });
+
+            modelBuilder.Entity("backend_todo.Models.Task_Tag", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<int?>("Tagid")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("Taskid")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("created_at")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("tag_id")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("task_id")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Tagid");
+
+                    b.HasIndex("Taskid");
+
+                    b.ToTable("Task_Tag");
                 });
 
             modelBuilder.Entity("backend_todo.Models.User", b =>
@@ -57,8 +210,20 @@ namespace backend_todo.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("created_at")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("email")
                         .HasColumnType("text");
+
+                    b.Property<string>("first_name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("last_name")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("username")
                         .HasColumnType("text");
@@ -68,17 +233,80 @@ namespace backend_todo.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("backend_todo.Models.Task", b =>
+            modelBuilder.Entity("backend_todo.Models.Attachments", b =>
                 {
+                    b.HasOne("backend_todo.Models.Task", "Task")
+                        .WithMany("Attachments")
+                        .HasForeignKey("Taskid");
+
+                    b.Navigation("Task");
+                });
+
+            modelBuilder.Entity("backend_todo.Models.Comment", b =>
+                {
+                    b.HasOne("backend_todo.Models.Task", "Task")
+                        .WithMany("Comments")
+                        .HasForeignKey("Taskid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("backend_todo.Models.User", "User")
-                        .WithMany("Task")
-                        .HasForeignKey("userId");
+                        .WithMany("Comments")
+                        .HasForeignKey("Userid");
+
+                    b.Navigation("Task");
 
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("backend_todo.Models.Task", b =>
+                {
+                    b.HasOne("backend_todo.Models.User", "User")
+                        .WithMany("Task")
+                        .HasForeignKey("Userid");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("backend_todo.Models.Task_Priority", b =>
+                {
+                    b.HasOne("backend_todo.Models.Task", "Task")
+                        .WithMany("Task_Priority")
+                        .HasForeignKey("Taskid");
+
+                    b.Navigation("Task");
+                });
+
+            modelBuilder.Entity("backend_todo.Models.Task_Tag", b =>
+                {
+                    b.HasOne("backend_todo.Models.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("Tagid");
+
+                    b.HasOne("backend_todo.Models.Task", "Task")
+                        .WithMany("Task_Tag")
+                        .HasForeignKey("Taskid");
+
+                    b.Navigation("Tag");
+
+                    b.Navigation("Task");
+                });
+
+            modelBuilder.Entity("backend_todo.Models.Task", b =>
+                {
+                    b.Navigation("Attachments");
+
+                    b.Navigation("Comments");
+
+                    b.Navigation("Task_Priority");
+
+                    b.Navigation("Task_Tag");
+                });
+
             modelBuilder.Entity("backend_todo.Models.User", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Task");
                 });
 #pragma warning restore 612, 618

@@ -365,8 +365,11 @@ FodyWeavers.xsd
 /.vscode
 /backend-todo/bin
 /backend-todo/.vscode
+backend-todo/obj/
 /todo.sln
 /front
+backend-todo/backend-todo.sln
+
 
 
 # dependencies
@@ -381,6 +384,7 @@ FodyWeavers.xsd
 /front-end/build
 
 # misc
+/front-end/.vscode
 /front-end/.DS_Store
 /front-end/.env.local
 /front-end/.env.development.local

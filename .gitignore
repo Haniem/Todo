@@ -365,7 +365,8 @@ FodyWeavers.xsd
 /.vscode
 /backend-todo/bin
 /backend-todo/.vscode
-backend-todo/obj/
+backend-todo/obj
+backend-todo/bin
 /todo.sln
 /front
 backend-todo/backend-todo.sln
